@@ -14,6 +14,7 @@ gem 'axios_rails', '~> 0.7.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 gem 'pry'
+gem 'unicorn'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

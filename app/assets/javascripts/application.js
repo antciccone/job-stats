@@ -15,25 +15,51 @@
 //= require_tree .
 
 $(document).ready(function(){
-  displayAllCompanies()
+ displayAllCompanies()
+ displayAllResponse()
+
+  $('li').on('click', function(){
+    $('input')[0].id = this.innerText
+  })
 
   $('#anthony').on('click', function(){
     var input = $('.input-value')[0].value
-    axios.post('/dashboard',  {name:input})
-    addToCompanyList(input)
-  })
+    if ($('input')[0].id === "Company/outreach date") {
+      axios.post('/company',  {name:input})
+      addToCompanyList(input)
+    }
+    else if ($('input')[0].id === "Response of Outreach") {
+      axios.post('/response',  {description:input})
+      addToResponseList(input)
+	   }
+   })
 })
 
 function addToCompanyList(value) {
   $(".company-and-date").append('<li>' + value + '</li><hr>')
 }
 
+function addToResponseList(value) {
+  $(".response").append('<li>' + value + '</li><hr>')
+}
+
+
 function displayAllCompanies() {
-  axios.get('/test')
+  axios.get('/all_companies')
   .then(function(response){
     var data = response.data
     for (var i = 0; i < data.length; i++) {
       $(".company-and-date").append('<li>' + data[i].name + '</li><hr>')
+    }
+  })
+}
+
+function displayAllResponse() {
+  axios.get('/all_responses')
+  .then(function(response){
+    var data = response.data
+    for (var i = 0; i < data.length; i++) {
+      $(".response").append('<li>' + data[i].description + '</li><hr>')
     }
   })
 }
