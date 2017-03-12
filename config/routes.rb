@@ -12,4 +12,8 @@ get '/all_responses', to: 'response#all_responses'
 post '/applied', to: 'applied#create'
 get '/all_applied', to: 'applied#all_applied'
 
+
+post '/phone-interview', to: 'phone_interview#create'
+get '/phone-interview', to: 'phone_interview#interviews'
+
 end

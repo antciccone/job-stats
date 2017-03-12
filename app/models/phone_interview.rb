@@ -1,0 +1,2 @@
+class PhoneInterview < ApplicationRecord
+end
