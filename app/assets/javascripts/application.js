@@ -17,6 +17,9 @@
 $(document).ready(function(){
  displayAllCompanies()
  displayAllResponse()
+ displayAllApplied()
+
+
 
   $('li').on('click', function(){
     $('input')[0].id = this.innerText
@@ -32,6 +35,10 @@ $(document).ready(function(){
       axios.post('/response',  {description:input})
       addToResponseList(input)
 	   }
+     else if ($('input')[0].id === "Directly Applied online") {
+       axios.post('/applied',  {company:input})
+       addToAppliedList(input)
+     }
    })
 })
 
@@ -43,6 +50,9 @@ function addToResponseList(value) {
   $(".response").append('<li>' + value + '</li><hr>')
 }
 
+function addToAppliedList(value){
+  $(".directly-applied").append('<li>' + value + '</li><hr>')
+}
 
 function displayAllCompanies() {
   axios.get('/all_companies')
@@ -60,6 +70,16 @@ function displayAllResponse() {
     var data = response.data
     for (var i = 0; i < data.length; i++) {
       $(".response").append('<li>' + data[i].description + '</li><hr>')
+    }
+  })
+}
+
+function displayAllApplied() {
+  axios.get('/all_applied')
+  .then(function(response){
+    var data = response.data
+    for (var i = 0; i < data.length; i++) {
+      $(".directly-applied").append('<li>' + data[i].company + '</li><hr>')
     }
   })
 }

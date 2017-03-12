@@ -9,4 +9,7 @@ get '/all_companies', to: 'company#all_companies'
 post '/response', to: 'response#create'
 get '/all_responses', to: 'response#all_responses'
 
+post '/applied', to: 'applied#create'
+get '/all_applied', to: 'applied#all_applied'
+
 end
