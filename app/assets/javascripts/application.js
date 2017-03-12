@@ -19,6 +19,7 @@ $(document).ready(function(){
  displayAllResponse()
  displayAllApplied()
  displayAllPhoneInterviews()
+ displayAllHomework()
 
 $('li').on('click', function(){
   $('input')[0].id = this.innerText
@@ -46,23 +47,33 @@ $('#anthony').on('click', function(){
     addToInpersonInterviewList(input)
     getStats();
     }
+  else if ($('input')[0].id === "Take Home Assignment") {
+    axios.post('/homework',  {company:input})
+    addToHomework(input)
+    getStats();
+
+    }
   })
 })
 
 function addToCompanyList(value) {
-  $(".company-and-date").append('<li>' + value + '</li>')
+  $(".company-and-date").append('<li contenteditable="true">' + value + '</li>')
 }
 
 function addToResponseList(value) {
-  $(".response").append('<li>' + value + '</li>')
+  $(".response").append('<li contenteditable="true">' + value + '</li>')
 }
 
 function addToAppliedList(value){
-  $(".directly-applied").append('<li>' + value + '</li>')
+  $(".directly-applied").append('<li contenteditable="true">' + value + '</li>')
 }
 
 function addToInpersonInterviewList(value){
-  $(".phone-interview").append('<li>' + value + '</li>')
+  $(".phone-interview").append('<li contenteditable="true">' + value + '</li>')
+}
+
+function addToHomework(value) {
+  $(".homework").append('<li contenteditable="true">' + value + '</li>')
 }
 
 function displayAllCompanies() {
@@ -70,7 +81,7 @@ function displayAllCompanies() {
   .then(function(response){
     var data = response.data
     for (var i = 0; i < data.length; i++) {
-      $(".company-and-date").append('<li>' + data[i].name + '</li>')
+      $(".company-and-date").append('<li contenteditable="true">' + data[i].name + '</li>')
     }
   })
 }
@@ -80,7 +91,7 @@ function displayAllResponse() {
   .then(function(response){
     var data = response.data
     for (var i = 0; i < data.length; i++) {
-      $(".response").append('<li>' + data[i].description + '</li>')
+      $(".response").append('<li contenteditable="true">' + data[i].description + '</li>')
     }
     getStats();
   })
@@ -91,7 +102,7 @@ function displayAllApplied() {
   .then(function(response){
     var data = response.data
     for (var i = 0; i < data.length; i++) {
-      $(".directly-applied").append('<li>' + data[i].company + '</li>')
+      $(".directly-applied").append('<li contenteditable="true">' + data[i].company + '</li>')
     }
     getStats();
   })
@@ -102,7 +113,18 @@ function  displayAllPhoneInterviews() {
   .then(function(response){
     var data = response.data
     for (var i = 0; i < data.length; i++) {
-      $(".phone-interview").append('<li>' + data[i].company + '</li>')
+      $(".phone-interview").append('<li contenteditable="true">' + data[i].company + '</li>')
+    }
+    getStats();
+  })
+}
+
+function displayAllHomework() {
+  axios.get('/all-homework')
+  .then(function(response){
+    var data = response.data
+    for (var i = 0; i < data.length; i++) {
+      $(".homework").append('<li contenteditable="true">' + data[i].company + '</li>')
     }
     getStats();
   })
@@ -115,5 +137,6 @@ function getStats() {
   $("#response")[0].innerText = "Response of Out Reach " + "(" + $(".response li").length + ")"
   $("#directly-applied")[0].innerText = "Directly Applied online " + "(" + $(".directly-applied li").length + ")"
   $("#phone-interview")[0].innerText = "Phone Interview " + "(" + $(".phone-interview li").length + ")"
+  $("#homework")[0].innerText = "Take Home Assignment " + "(" + $(".homework li").length + ")"
 
 }

@@ -16,4 +16,7 @@ get '/all_applied', to: 'applied#all_applied'
 post '/phone-interview', to: 'phone_interview#create'
 get '/phone-interview', to: 'phone_interview#interviews'
 
+post '/homework', to: 'homework#create'
+get '/all-homework', to: 'homework#all_homework'
+
 end
