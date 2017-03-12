@@ -19,27 +19,28 @@ $(document).ready(function(){
  displayAllResponse()
  displayAllApplied()
 
+$('li').on('click', function(){
+  $('input')[0].id = this.innerText
+})
 
-
-  $('li').on('click', function(){
-    $('input')[0].id = this.innerText
-  })
-
-  $('#anthony').on('click', function(){
-    var input = $('.input-value')[0].value
-    if ($('input')[0].id === "Company/outreach date") {
-      axios.post('/company',  {name:input})
-      addToCompanyList(input)
+$('#anthony').on('click', function(){
+  var input = $('.input-value')[0].value
+  if ($('input')[0].id === "Company/outreach date") {
+    axios.post('/company',  {name:input})
+    addToCompanyList(input)
+    getStats()
+  }
+  else if ($('input')[0].id === "Response of Outreach") {
+    axios.post('/response',  {description:input})
+    addToResponseList(input)
+    getStats()
+   }
+   else if ($('input')[0].id === "Directly Applied online") {
+     axios.post('/applied',  {company:input})
+     addToAppliedList(input)
+     getStats();
     }
-    else if ($('input')[0].id === "Response of Outreach") {
-      axios.post('/response',  {description:input})
-      addToResponseList(input)
-	   }
-     else if ($('input')[0].id === "Directly Applied online") {
-       axios.post('/applied',  {company:input})
-       addToAppliedList(input)
-     }
-   })
+  })
 })
 
 function addToCompanyList(value) {
@@ -71,6 +72,7 @@ function displayAllResponse() {
     for (var i = 0; i < data.length; i++) {
       $(".response").append('<li>' + data[i].description + '</li><hr>')
     }
+    getStats();
   })
 }
 
@@ -81,5 +83,14 @@ function displayAllApplied() {
     for (var i = 0; i < data.length; i++) {
       $(".directly-applied").append('<li>' + data[i].company + '</li><hr>')
     }
+    getStats();
   })
+}
+
+function getStats() {
+  var percentage = ($('.response li').length / $(".company-and-date li").length) * 100
+  $('.applied-percent')[0].innerText = 'Response Percentage:' + " " + Math.round(percentage) + '%'
+  $("#company-and-date")[0].innerText = "Company/outreach date" + " " + "(" + $(".company-and-date li").length + ")"
+  $("#response")[0].innerText = "Response of Out Reach " + "(" + $(".response li").length + ")"
+  $("#directly-applied")[0].innerText = "Directly Applied online " + "(" + $(".directly-applied li").length + ")"
 }
