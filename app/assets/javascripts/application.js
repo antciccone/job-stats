@@ -15,13 +15,23 @@
 //= require_tree .
 
 $(document).ready(function(){
-  $('li').on('click', function(){
-    addInput(this)
+
+  $('#anthony').on('click', function(){
+    var input = $('.input-value')[0].value
+    axios.post('/dashboard',  {name:input})
+    displayCompany()
   })
+
+  displayCompany()
+
 })
 
-function addInput(value) {
-  var text = value.innerText
-  $('.dropdown-button').after('<button style="margin-left: 10px;" class="waves-effect waves-light btn">Add to table</button><br>')
-  $('.waves-effect').after('<input  placeholder=' +  text + '="first_name" type="text" class="validate">')
+function displayCompany() {
+  axios.get('/test')
+  .then(function(response){
+    var data = response.data
+    for (var i = 0; i < data.length; i++) {
+      $('tbody').append('<tr><td>' + data[i].name + '</td></tr>')
+    }
+  })
 }
