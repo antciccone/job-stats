@@ -15,23 +15,25 @@
 //= require_tree .
 
 $(document).ready(function(){
+  displayAllCompanies()
 
   $('#anthony').on('click', function(){
     var input = $('.input-value')[0].value
     axios.post('/dashboard',  {name:input})
-    displayCompany()
+    addToCompanyList(input)
   })
-
-  displayCompany()
-
 })
 
-function displayCompany() {
+function addToCompanyList(value) {
+  $(".company-and-date").append('<li>' + value + '</li><hr>')
+}
+
+function displayAllCompanies() {
   axios.get('/test')
   .then(function(response){
     var data = response.data
     for (var i = 0; i < data.length; i++) {
-      $('tbody').append('<tr><td>' + data[i].name + '</td></tr>')
+      $(".company-and-date").append('<li>' + data[i].name + '</li><hr>')
     }
   })
 }
