@@ -1,0 +1,11 @@
+<%= render "shared/not_signed_in_nav" %>
+<br>
+<div class="container">
+<%= form_tag '/login' do %>
+
+  Email: <%= text_field_tag :email %>
+  Password: <%= password_field_tag :password %>
+  <%= submit_tag "Submit" %>
+
+<% end %>
+</div>

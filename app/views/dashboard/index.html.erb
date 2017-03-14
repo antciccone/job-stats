@@ -1,16 +1,9 @@
-<div class="navbar-fixed">
-<nav>
-  <div class="nav-wrapper blue">
-    <a href="#" class="brand-logo center">Job Stats</a>
-    <ul id="nav-mobile" class="left hide-on-med-and-down">
-      <li><a class="applied-percent">Reply Percentage: </a></li>
-    </ul>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a> Login </a></li>
-    </ul>
-  </div>
-</nav>
-</div>
+<% if current_user %>
+<%= render "shared/signed_in_nav" %>
+<% else %>
+<%= render "shared/not_signed_in_nav" %>
+
+<% end %>
 
 <div class="container">
   <br>

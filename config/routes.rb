@@ -22,4 +22,11 @@ get '/all-homework', to: 'homework#all_homework'
 post '/in-person', to: 'in_person#create'
 get '/all-interviews', to: 'in_person#interview'
 
+get '/', to: redirect('/login')
+get '/login', to: 'sessions#new'
+post '/login', to: 'sessions#create'
+delete '/logout', to: 'sessions#destroy'
+resources :users, only: [:index, :new, :create]
+
+
 end
