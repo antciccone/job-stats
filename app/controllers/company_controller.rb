@@ -2,8 +2,10 @@ class CompanyController < ApplicationController
   skip_before_filter  :verify_authenticity_token
 
   def create
-    company = current_user.companies(company_params)
-    company.save
+    company = current_user.companies.new(company_params)
+    if company.save
+      flash[:message] = "testing"
+    end
   end
 
   def all_companies
