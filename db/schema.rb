@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314215634) do
+ActiveRecord::Schema.define(version: 20170314224829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20170314215634) do
     t.string   "company"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "user_id"
+    t.index ["user_id"], name: "index_applieds_on_user_id", using: :btree
   end
 
   create_table "companies", force: :cascade do |t|
@@ -26,30 +28,48 @@ ActiveRecord::Schema.define(version: 20170314215634) do
     t.string   "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "user_id"
+    t.index ["user_id"], name: "index_companies_on_user_id", using: :btree
   end
 
   create_table "homeworks", force: :cascade do |t|
     t.string   "company"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "user_id"
+    t.index ["user_id"], name: "index_homeworks_on_user_id", using: :btree
   end
 
   create_table "in_people", force: :cascade do |t|
     t.string   "company"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "user_id"
+    t.index ["user_id"], name: "index_in_people_on_user_id", using: :btree
   end
 
   create_table "phone_interviews", force: :cascade do |t|
     t.string   "company"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "user_id"
+    t.index ["user_id"], name: "index_phone_interviews_on_user_id", using: :btree
   end
 
   create_table "responses", force: :cascade do |t|
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "user_id"
+    t.index ["user_id"], name: "index_responses_on_user_id", using: :btree
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end
