@@ -13,7 +13,7 @@ class HomeworkController < ApplicationController
   private
 
   def homework_params
-  params.require(:homework).permit(:company)
+    params.require(:homework).permit(:company)
   end
 
 end
