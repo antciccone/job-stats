@@ -22,6 +22,9 @@ get '/all-homework', to: 'homework#all_homework'
 post '/in-person', to: 'in_person#create'
 get '/all-interviews', to: 'in_person#interview'
 
+post '/coffee', to: 'coffee#create'
+get '/coffee', to: 'coffee#date'
+
 get '/', to: redirect('/login')
 get '/login', to: 'sessions#new'
 post '/login', to: 'sessions#create'
