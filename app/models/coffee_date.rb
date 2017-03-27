@@ -1,0 +1,2 @@
+class CoffeeDate < ApplicationRecord
+end
